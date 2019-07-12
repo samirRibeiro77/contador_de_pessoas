@@ -11,7 +11,26 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   int _people  = 0;
+  String _infoText = "Pode entrar!";
 
+  void _changePeople(int value) {
+    setState(() {
+      _people += value;
+
+      if(_people < 0) {
+        _infoText = "o.O mundo invertido O.o";
+      }
+      else {
+        _infoText = "Pode entrar :)";
+      }
+
+      if(_people > 10) {
+        _infoText = "Lotado :(";
+      }
+    });
+  }
+
+  /*
   void _addOne () {
     setState(() {
       _people++;
@@ -23,6 +42,7 @@ class _HomeState extends State<Home> {
       _people--;
     });
   }
+  */
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +71,7 @@ class _HomeState extends State<Home> {
                       '+1',
                       style: TextStyle(fontSize: 40.0, color: Colors.white),
                     ),
-                    onPressed: _addOne,
+                    onPressed: () { _changePeople(1); },
                   ),
                 ),
                 Padding(
@@ -61,13 +81,13 @@ class _HomeState extends State<Home> {
                       '-1',
                       style: TextStyle(fontSize: 40.0, color: Colors.white),
                     ),
-                    onPressed: _removeOne,
+                    onPressed: () { _changePeople(-1); },
                   ),
                 )
               ],
             ),
             Text(
-              "Pode entrar!",
+              "$_infoText",
               style: TextStyle(
                   color: Colors.white,
                   fontStyle: FontStyle.italic,
